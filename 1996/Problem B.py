@@ -1,5 +1,4 @@
 x = input()
-y = input()
 
 def divisible_by_11(a):
     b = int(two_digits(a))
@@ -15,7 +14,8 @@ def two_digits(a):
         print(a)
         return two_digits(str(int(a[:len(a)-1]) - int(a[len(a)-1]))) 
 
-for i in y.split():
-    divisible_by_11(i)
+for i in range(0,x):
+    y = input()
+    divisible_by_11(y)
 
 
