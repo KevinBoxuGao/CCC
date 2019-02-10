@@ -2,53 +2,74 @@
 length = int(input())
 matrix = []
 for i in range(length):
-    matrix.append(input().split(" "))
+    matrix.append([int(i) for i in input().split(" ")])
 
-def CheckForOrder(alist):
-    num = alist[0]
-    for i in alist:
+def CheckForOrder(aList):
+    num = aList[0]
+    for i in aList:
         if i >= num:
             num = i
         else:
             return False
     return True
 
-def CheckForOrderedRows(alist):
-    for i in range(length):
-        if CheckForOrder(alist[i]) == True:
+def CheckForRows(aList):
+    for i in aList:
+        if CheckForOrder(i) == True:
             continue
         else:
             return False
     return True
 
-def RotateMatrix(mat):
-    #for x in range(0,length):
-        #for y in range(x,Length-x-1):
-    N = length
-    for x in range(0, int(length/2)): 
-        for y in range(x, N-x-1): 
-            temp = mat[x][y] 
-  
-            mat[x][y] = mat[y][N-1-x] 
-            mat[y][N-1-x] = mat[N-1-x][N-1-y] 
-            mat[N-1-x][N-1-y] = mat[N-1-y][x] 
-            mat[N-1-y][x] = temp 
+def CheckForColumns(aList):
+    for i in range(length):
+        Column = [row[i] for row in aList]
+        if CheckForOrder(Column) == True:
+            continue
+        else:
+            return False
+    return True
 
-matrixrotated = matrix
-for i in range(3):
-    RotateMatrix(matrixrotated)
+
+
+
+
+def reverseColumns(arr): 
+    for i in range(length): 
+        j = 0
+        k = length-1
+        while j < k: 
+            t = arr[j][i] 
+            arr[j][i] = arr[k][i] 
+            arr[k][i] = t 
+            j += 1
+            k -= 1
+    
+# Function for do transpose of matrix 
+def transpose(arr): 
+    for i in range(length): 
+        for j in range(i, length): 
+            temp = arr[i][j] 
+            arr[i][j] = arr[j][i] 
+            arr[j][i] = temp 
+   
+def rotateMatrix(arr): 
+    transpose(arr) 
+    reverseColumns(arr)
+
+
+
+
 
 #Driver
 for i in range(4):
-    if CheckForOrderedRows(matrix) == True:
-        if CheckForOrderedRows(matrixrotated) == True:
+    if CheckForRows(matrix) == True:
+        if CheckForColumns(matrix) == True:
             break
         else:
-            RotateMatrix(matrix)
-            RotateMatrix(matrixrotated)
+            rotateMatrix(matrix)
     else:
-        RotateMatrix(matrix)
-        RotateMatrix(matrixrotated)
+        rotateMatrix(matrix)
 
 #Print Output
 for i in range(length):
