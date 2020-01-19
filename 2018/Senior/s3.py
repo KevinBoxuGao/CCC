@@ -106,6 +106,7 @@ def shortestPath(start, end):
 
     visited[sr][sc] = True
 
+    # BFS for finding shortest path
     while len(rq) > 0:
         r = rq.pop(0)
         c = cq.pop(0)
